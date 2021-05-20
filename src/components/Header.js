@@ -2,38 +2,40 @@ import React from 'react';
 import styled from 'styled-components';
 
 function Header() {
-    return (
-        <Navbar>
-            <Logo src='/images/logo.svg' />
-            <NavMenu>
-                <a href=''>
-                    <img src='/images/home-icon.svg' />
-                    <span>home</span>
-                </a>{' '}
-                <a href=''>
-                    <img src='/images/search-icon.svg' />
-                    <span>search</span>
-                </a>
-                <a href=''>
-                    <img src='/images/watchlist-icon.svg' />
-                    <span>watchlist</span>
-                </a>
-                <a href=''>
-                    <img src='/images/original-icon.svg' />
-                    <span>originals</span>
-                </a>
-                <a href=''>
-                    <img src='/images/movie-icon.svg' />
-                    <span>movies</span>
-                </a>
-                <a href=''>
-                    <img src='/images/series-icon.svg' />
-                    <span>series</span>
-                </a>
-            </NavMenu>
-            <UserImg src='https://it-service.givenbase.com/wp-content/uploads/2016/07/Given-2-1.png' />
-        </Navbar>
-    );
+	return (
+		<Navbar>
+			<a href='/'>
+				<Logo src='/images/logo.svg' />
+			</a>
+			<NavMenu>
+				<a href='/'>
+					<img src='/images/home-icon.svg' />
+					<span>home</span>
+				</a>{' '}
+				<a href='/search'>
+					<img src='/images/search-icon.svg' />
+					<span>search</span>
+				</a>
+				<a href='/watchlist'>
+					<img src='/images/watchlist-icon.svg' />
+					<span>watchlist</span>
+				</a>
+				<a href='/originals'>
+					<img src='/images/original-icon.svg' />
+					<span>originals</span>
+				</a>
+				<a href='/movies'>
+					<img src='/images/movie-icon.svg' />
+					<span>movies</span>
+				</a>
+				<a href='/series'>
+					<img src='/images/series-icon.svg' />
+					<span>series</span>
+				</a>
+			</NavMenu>
+			<UserImg src='https://it-service.givenbase.com/wp-content/uploads/2016/07/Given-2-1.png' />
+		</Navbar>
+	);
 }
 
 export default Header;
@@ -81,8 +83,8 @@ const NavMenu = styled.div`
 				right: 0;
 				bottom: -6px;
 				opacity: 0;
-                transform-origin: left center;
-                transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+				transform-origin: left center;
+				transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
 				transform: scaleX(0);
 			}
 		}
