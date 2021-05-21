@@ -172,5 +172,8 @@ const Login = styled.div`
 	}
 `;
 
-const LogOutContainer = styled(LoginContainer)``;
+const LogOutContainer = styled(LoginContainer)`
+	align-items: center;
+	grid-gap: 10px;
+`;
 const Logout = styled(Login)``;

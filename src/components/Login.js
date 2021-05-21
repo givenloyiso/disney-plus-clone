@@ -1,22 +1,50 @@
 import React from 'react';
 import styled from 'styled-components';
+import { auth, provider } from '../firebase';
+import { useHistory } from 'react-router-dom';
+import {
+	selectUserName,
+	selectUserPhoto,
+	setUserLogin,
+} from '../features/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Login() {
-    return (
-        <Container>
-            <CTA>
-                <CTALogoOne src='/images/cta-logo-one.svg' />
-                <SignUp>get all there</SignUp>
-                <Description>
-                    It was popularised in the 1960s with the release of Letraset sheets
-                    containing Lorem Ipsum passages, and more recently with desktop
-                    publishing software like Aldus PageMaker including versions of Lorem
-                    Ipsum.
+
+	const dispatch = useDispatch();
+	const history = useHistory();
+	const userPhoto = useSelector(selectUserPhoto);
+	const userName = useSelector(selectUserName);
+
+	const signIn = () => {
+		auth.signInWithPopup(provider).then((result) => {
+			let user = result.user;
+			dispatch(
+				setUserLogin({
+					name: user.displayName,
+					email: user.email,
+					photo: user.photoURL,
+				})
+			);
+			history.push('/');
+		});
+	};
+
+	return (
+		<Container>
+			<CTA>
+				<CTALogoOne src='/images/cta-logo-one.svg' />
+				<SignUp onClick={signIn}>get all there</SignUp>
+				<Description>
+					It was popularised in the 1960s with the release of Letraset sheets
+					containing Lorem Ipsum passages, and more recently with desktop
+					publishing software like Aldus PageMaker including versions of Lorem
+					Ipsum.
 				</Description>
-                <CTALogoTwo src='/images/cta-logo-two.png' />
-            </CTA>
-        </Container>
-    );
+				<CTALogoTwo src='/images/cta-logo-two.png' />
+			</CTA>
+		</Container>
+	);
 }
 
 export default Login;
