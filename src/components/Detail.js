@@ -1,23 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+import db from '../firebase';
 
 function Detail() {
+	const { id } = useParams();
+	const [movie, setMovie] = useState();
+	useEffect(() => {
+		db.collection('movies')
+			.doc(id)
+			.get()
+			.then((doc) => {
+				if (doc.exists) {
+					setMovie(doc.data());
+				} else {
+				}
+				// Redirect to home
+			});
+	}, []);
+
 	return (
 		<Container>
 			<Background>
-				<img alt="Movie Background Banner" src='https://s.studiobinder.com/wp-content/uploads/2020/12/Movie-Genres-Types-of-Movies-List-of-Genres-and-Categories-StudioBinder.jpg' />
+				<img alt='' src={movie && movie.backgroundImg} />
 			</Background>
 			<ImageTitle>
-				<img alt="Movie Logo" src='https://upload.wikimedia.org/wikipedia/commons/b/b9/Marvel_Logo.svg' />
+				<img alt='' src={movie && movie.titleImg} />
 			</ImageTitle>
-
 			<Controls>
 				<PlayButton>
-					<img src='/images/play-icon-black.png' />
+					<img alt='' src='/images/play-icon-black.png' />
 					<span>play</span>
 				</PlayButton>
 				<TrailerButton>
-					<img src='/images/play-icon-white.png' />
+					<img alt='' src='/images/play-icon-white.png' />
 					<span>trailer</span>
 				</TrailerButton>
 
@@ -26,16 +42,11 @@ function Detail() {
 				</Addbutton>
 
 				<GroupWatchButton>
-					<img src='/images/group-icon.png' />
+					<img alt='' src='/images/group-icon.png' />
 				</GroupWatchButton>
 			</Controls>
-			<SubTitle>2018 - 7m - Family, Fatansy, Kids Animation</SubTitle>
-			<Description>
-				It was popularised in the 1960s with the release of Letraset sheets
-				containing Lorem Ipsum passages, and more recently with desktop
-				publishing software like Aldus PageMaker including versions of Lorem
-				Ipsum.
-			</Description>
+			<SubTitle>{movie && movie.subtitle}</SubTitle>
+			<Description>{movie && movie.description}</Description>
 		</Container>
 	);
 }

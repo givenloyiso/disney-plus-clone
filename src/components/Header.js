@@ -1,39 +1,84 @@
 import React from 'react';
+import { auth, provider } from '../firebase';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import {
+	selectUserName,
+	selectUserPhoto,
+	setUserLogin,
+	setSignOut,
+} from '../features/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Header() {
+	const dispatch = useDispatch();
+	const history = useHistory();
+	const userPhoto = useSelector(selectUserPhoto);
+	const userName = useSelector(selectUserName);
+
+	const signIn = () => {
+		auth.signInWithPopup(provider).then((result) => {
+			let user = result.user;
+			dispatch(
+				setUserLogin({
+					name: user.displayName,
+					email: user.email,
+					photo: user.photoURL,
+				})
+			);
+		});
+	};
+
+	const signOut = () => {
+		auth.signOut().then(() => {
+			dispatch(setSignOut());
+			history.push('/login');
+		});
+	};
+
 	return (
 		<Navbar>
 			<a href='/'>
-				<Logo alt="Website Logo" src='/images/logo.svg' />
+				<Logo alt='' src='/images/logo.svg' />
 			</a>
-			<NavMenu>
-				<a href='/'>
-					<img src='/images/home-icon.svg' />
-					<span>home</span>
-				</a>{' '}
-				<a href='/search'>
-					<img src='/images/search-icon.svg' />
-					<span>search</span>
-				</a>
-				<a href='/watchlist'>
-					<img src='/images/watchlist-icon.svg' />
-					<span>watchlist</span>
-				</a>
-				<a href='/originals'>
-					<img src='/images/original-icon.svg' />
-					<span>originals</span>
-				</a>
-				<a href='/movies'>
-					<img src='/images/movie-icon.svg' />
-					<span>movies</span>
-				</a>
-				<a href='/series'>
-					<img src='/images/series-icon.svg' />
-					<span>series</span>
-				</a>
-			</NavMenu>
-			<UserImg src='https://it-service.givenbase.com/wp-content/uploads/2016/07/Given-2-1.png' />
+			{!userName ? (
+				<LoginContainer>
+					<Login onClick={signIn}>Login</Login>
+				</LoginContainer>
+			) : (
+				<LoginContainer>
+					<NavMenu>
+						<a href='/'>
+							<img alt='' src='/images/home-icon.svg' />
+							<span>home</span>
+						</a>{' '}
+						<a href='/search'>
+							<img alt='' src='/images/search-icon.svg' />
+							<span>search</span>
+						</a>
+						<a href='/watchlist'>
+							<img alt='' src='/images/watchlist-icon.svg' />
+							<span>watchlist</span>
+						</a>
+						<a href='/originals'>
+							<img alt='' src='/images/original-icon.svg' />
+							<span>originals</span>
+						</a>
+						<a href='/movies'>
+							<img alt='' src='/images/movie-icon.svg' />
+							<span>movies</span>
+						</a>
+						<a href='/series'>
+							<img alt='' src='/images/series-icon.svg' />
+							<span>series</span>
+						</a>
+					</NavMenu>
+					<LogOutContainer>
+						<UserImg src={userPhoto && userPhoto} />
+						<Logout onClick={signOut}>Logout</Logout>
+					</LogOutContainer>
+				</LoginContainer>
+			)}
 		</Navbar>
 	);
 }
@@ -58,7 +103,7 @@ const NavMenu = styled.div`
 	margin-left: 25px;
 
 	a {
-		display: flex;
+						display: flex;
 		align-items: center;
 		padding: 0 12px;
 		color: white;
@@ -66,16 +111,16 @@ const NavMenu = styled.div`
 		text-transform: uppercase;
 
 		img {
-			height: 20px;
+						height: 20px;
 		}
 
 		span {
-			font-size: 13px;
+						font - size: 13px;
 			letter-spacing: 1.42px;
 			position: relative;
 
 			&:after {
-				content: '';
+						content: '';
 				height: 2px;
 				background: #fff;
 				position: absolute;
@@ -89,9 +134,9 @@ const NavMenu = styled.div`
 			}
 		}
 		&:hover {
-			span {
+						span {
 				&:after {
-					opacity: 1;
+						opacity: 1;
 					transform: scaleX(1);
 				}
 			}
@@ -104,3 +149,28 @@ const UserImg = styled.img`
 	height: 48px;
 	border-radius: 50%;
 `;
+
+const LoginContainer = styled.div`
+	display: flex;
+	flex: 1;
+	justify-content: flex-end;
+`;
+
+const Login = styled.div`
+	border: 1px solid #f9f9f9;
+	padding: 8px 16px;
+	border-radius: 4px;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	background-color: rgba(0, 0, 0, 0.6);
+	cursor: pointer;
+
+	&:hover {
+		background-color: #f9f9f9;
+		color: #000;
+		border-color: transparent;
+	}
+`;
+
+const LogOutContainer = styled(LoginContainer)``;
+const Logout = styled(Login)``;

@@ -8,7 +8,7 @@ const firebaseConfig = {
   messagingSenderId: "37918794208",
   appId: "1:37918794208:web:dbe9842dfe1dda522a4b85",
   // measurementId: "G-DRVLJKWRWG",
-
+// 
   // apiKey: 'AIzaSyA0shpzCw6J8ROy6ZpBSi1VEBXMitOmbF0',
   // authDomain: 'disney-plus-clone-1f953.firebaseapp.com',
   // projectId: 'disney-plus-clone-1f953',
