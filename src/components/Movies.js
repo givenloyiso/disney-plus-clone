@@ -1,26 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import { selectMovies } from '../features/movie/movieSlice';
+import { useSelector } from 'react-redux';
 
 function Movies() {
-    return (
-        <Container>
-            <h4>Recommanded for You</h4>
-            <Content>
-                <Wrap>
-                    <img src='https://i.annihil.us/u/prod/marvel/i/mg/5/50/5220c5f104d3a.jpg' />
-                </Wrap>
-                <Wrap>
-                    <img src='https://i.annihil.us/u/prod/marvel/i/mg/5/50/5220c5f104d3a.jpg' />
-                </Wrap>
-                <Wrap>
-                    <img src='https://i.annihil.us/u/prod/marvel/i/mg/5/50/5220c5f104d3a.jpg' />
-                </Wrap>
-                <Wrap>
-                    <img src='https://i.annihil.us/u/prod/marvel/i/mg/5/50/5220c5f104d3a.jpg' />
-                </Wrap>
-            </Content>
-        </Container>
-    );
+	const movies = useSelector(selectMovies);
+	return (
+		<Container>
+			<h4>Recommanded for You</h4>
+			<Content>
+				{movies &&
+					movies.map((movie) => (
+						<Wrap key={movie.id}>
+							<img alt={movie.title} src={movie.cardImg} />
+						</Wrap>
+					))}
+			</Content>
+		</Container>
+	);
 }
 
 export default Movies;
@@ -49,8 +46,8 @@ const Wrap = styled.div`
 
 	&:hover {
 		transform: scale(1.05);
-        box-shadow: rgba(0 0 0 / 80%) 0 40px 58px -16px,
-		rgba(0 0 0 /72%) 0 30px 22px -10px;
+		box-shadow: rgba(0 0 0 / 80%) 0 40px 58px -16px,
+			rgba(0 0 0 /72%) 0 30px 22px -10px;
 		border-color: rgba(249, 249, 249, 0.8);
 	}
 `;

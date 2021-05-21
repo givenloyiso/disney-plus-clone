@@ -5,7 +5,7 @@ function Header() {
 	return (
 		<Navbar>
 			<a href='/'>
-				<Logo src='/images/logo.svg' />
+				<Logo alt="Website Logo" src='/images/logo.svg' />
 			</a>
 			<NavMenu>
 				<a href='/'>

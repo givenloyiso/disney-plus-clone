@@ -5,10 +5,10 @@ function Detail() {
 	return (
 		<Container>
 			<Background>
-				<img src='https://s.studiobinder.com/wp-content/uploads/2020/12/Movie-Genres-Types-of-Movies-List-of-Genres-and-Categories-StudioBinder.jpg' />
+				<img alt="Movie Background Banner" src='https://s.studiobinder.com/wp-content/uploads/2020/12/Movie-Genres-Types-of-Movies-List-of-Genres-and-Categories-StudioBinder.jpg' />
 			</Background>
 			<ImageTitle>
-				<img src='https://upload.wikimedia.org/wikipedia/commons/b/b9/Marvel_Logo.svg' />
+				<img alt="Movie Logo" src='https://upload.wikimedia.org/wikipedia/commons/b/b9/Marvel_Logo.svg' />
 			</ImageTitle>
 
 			<Controls>

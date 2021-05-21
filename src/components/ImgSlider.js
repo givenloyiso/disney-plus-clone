@@ -5,25 +5,25 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 function ImgSlider() {
-    let settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        // autoplay: true,
-    };
+	let settings = {
+		dots: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		// autoplay: true,
+	};
 
-    return (
-        <Carousel {...settings}>
-            <Wrap>
-                <img src='/images/slider-badging.jpg' />
-            </Wrap>
-            <Wrap>
-                <img src='/images/slider-badag.jpg' />
-            </Wrap>
-        </Carousel>
-    );
+	return (
+		<Carousel {...settings}>
+			<Wrap>
+				<img alt="Slider Image" src='/images/slider-badging.jpg' />
+			</Wrap>
+			<Wrap>
+				<img alt="Slider Image" src='/images/slider-badag.jpg' />
+			</Wrap>
+		</Carousel>
+	);
 }
 
 export default ImgSlider;
